@@ -1,170 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Solar Doomsday</title>
     <style>
-        html,body{
-            width:100%;
-            margin:0;
-            padding:0;
-            overflow-x:hidden;
-        }
+      html,
+      body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
 
-        body {
-            font-family: 'Dosis', sans-serif;
-            font-size: 1.5rem;
-            line-height: 165%;
-            color: #212121;
-            padding: 0;
-            margin: 0;
-        }
+      body {
+        font-family: 'Dosis', sans-serif;
+        font-size: 1.5rem;
+        line-height: 165%;
+        color: #212121;
+        padding: 0;
+        margin: 0;
+      }
 
-        strong {
-            font-size: 1.5rem;
-            line-height: 165%;
-        }
+      strong {
+        font-size: 1.5rem;
+        line-height: 165%;
+      }
 
-        p {
-            font-size: 1.2rem;
-            line-height: 135%;
-        }
+      p {
+        font-size: 1.2rem;
+        line-height: 135%;
+      }
 
-        section {
-            display: block;
-            width: 90%;
-            margin: 0 auto;
-        }
+      section {
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+      }
 
-        .row {
-            display: block;
-            width: 90%;
-        }
+      .row {
+        display: block;
+        width: 90%;
+      }
 
-        .row p {
-            font-size: 1rem;
-            margin: 0;
-            padding: 0;
-            font-style: italic;
-        }
+      .row p {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+        font-style: italic;
+      }
 
-        .row label {
-            display: inline-block;
-        }
+      .row label {
+        display: inline-block;
+      }
 
-        .row input {
-            display: inline-block;
-        }
+      .row input {
+        display: inline-block;
+      }
 
-        .answer {
-            padding-bottom: 30px;
-        }
-        .answer span {
-            display: inline-block;
-            border: 1px solid #aaa;
-            background: #f0f0f0;
-            padding: 2px 6px;
-            width: auto;
-            min-width: 150px;
-            line-height: 24px;
-            font-size: 1rem;
-            min-height: 1.5rem;
-        }
+      .answer {
+        padding-bottom: 30px;
+      }
+      .answer span {
+        display: inline-block;
+        border: 1px solid #aaa;
+        background: #f0f0f0;
+        padding: 2px 6px;
+        width: auto;
+        min-width: 150px;
+        line-height: 24px;
+        font-size: 1rem;
+        min-height: 1.5rem;
+      }
     </style>
-</head>
-<body>
-<section>
-    <h1>Solar Doomsday</h1>
+  </head>
+  <body>
+    <section>
+      <h1>Solar Doomsday</h1>
 
-    <p>
+      <p>
         <strong>Problem</strong><br />
-        Write a function answer(area) that takes as its input a single unit of measure
-        representing the total area of solar panels you have<br /> (between 1 and 1 000 000 inclusive) and
-        returns a list of the areas of the largest squares you could make out of those panels,<br />
+        Write a function answer(area) that takes as its input a single unit of measure representing
+        the total area of solar panels you have<br />
+        (between 1 and 1 000 000 inclusive) and returns a list of the areas of the largest squares
+        you could make out of those panels,<br />
         starting with the largest squares first.<br />
         So, following the example above, answer (12) would return [9, 1, 1, 1].
-    </p>
+      </p>
 
-    <p>
+      <p>
         <strong>My solution</strong><br />
-        Ok so i've writen this in about 20 minutes, and later added comments and html for this github
-        (explanation, input fields, etc.).<br />
-        At first i just solved the problem, then i tried making it more efficient
-        (how much squares of one size can we use ?),<br />
+        Ok so i've writen this in about 20 minutes, and later added comments and html for this
+        github (explanation, input fields, etc.).<br />
+        At first i just solved the problem, then i tried making it more efficient (how much squares
+        of one size can we use ?),<br />
         although it was just for fun and it wasn't slow to begin with...<br />
-    </p>
+      </p>
 
-    <div>
+      <div>
         <form>
-            <div class="row">
-                <label for="totalArea">Total area :</label>
-                <input type="text" id="totalArea" name="totalArea" />
-                <p>Please input the total area of solar panels you have (between 1 and 1 000 000 inclusive)</p>
-            </div>
-            <div class="row">
-                <button id="computeButton" name="computeButton">Calculer</button>
-            </div>
-            <div class="row answer">
-                <label for="areaList">Answer :</label>
-                <span id="areaList"></span>
-            </div>
+          <div class="row">
+            <label for="totalArea">Total area :</label>
+            <input type="text" id="totalArea" name="totalArea" />
+            <p>
+              Please input the total area of solar panels you have (between 1 and 1 000 000
+              inclusive)
+            </p>
+          </div>
+          <div class="row">
+            <button id="computeButton" name="computeButton">Get Answer</button>
+          </div>
+          <div class="row answer">
+            <label for="areaList">Answer :</label>
+            <span id="areaList"></span>
+          </div>
         </form>
-    </div>
-</section>
+      </div>
+    </section>
 
-<script>
-
-    /**
-     * Returns the biggest square that can fit in this area
-     *
-     * @param area
-     * @returns {number}
-     */
-    function getMaxSquare(area) {
+    <script>
+      /**
+       * Returns the biggest square that can fit in this area
+       *
+       * @param area
+       * @returns {number}
+       */
+      function getMaxSquare(area) {
         return Math.floor(Math.sqrt(area));
-    }
+      }
 
-
-    /**
-     * Return the list of the biggest squares that can fit in the total area
-     *
-     * @param surface
-     * @returns {Array}
-     */
-    function findSquares(totalArea) {
+      /**
+       * Return the list of the biggest squares that can fit in the total area
+       *
+       * @param surface
+       * @returns {Array}
+       */
+      function findSquares(totalArea) {
         let areaList = [];
         let maxSquare = 0;
         let maxSurface = 0;
         let howMany = 0;
         while (totalArea > 0) {
-            maxSquare = getMaxSquare(totalArea);
-            maxSurface = maxSquare * maxSquare;
+          maxSquare = getMaxSquare(totalArea);
+          maxSurface = maxSquare * maxSquare;
 
-            // check if we can fit more than one
-            howMany = Math.floor(totalArea / maxSurface);
-            if (howMany > 1) {
-                areaList = areaList.concat(Array(howMany).fill(maxSurface));
-
-            } else {
-                areaList.push(maxSurface);
-            }
-            totalArea -= maxSurface * howMany;
+          // check if we can fit more than one
+          howMany = Math.floor(totalArea / maxSurface);
+          if (howMany > 1) {
+            areaList = areaList.concat(Array(howMany).fill(maxSurface));
+          } else {
+            areaList.push(maxSurface);
+          }
+          totalArea -= maxSurface * howMany;
         }
         return areaList;
-    }
+      }
 
-
-    // just for ease of use
-    const totalArea = document.getElementById('totalArea');
-    const areaList = document.getElementById('areaList');
-    const computeButton = document.getElementById('computeButton');
-    computeButton.addEventListener('click', function(e) {
+      // just for ease of use
+      const totalArea = document.getElementById('totalArea');
+      const areaList = document.getElementById('areaList');
+      const computeButton = document.getElementById('computeButton');
+      computeButton.addEventListener('click', function (e) {
         e.stopPropagation();
         e.preventDefault();
         if (totalArea.value) {
-            areaList.innerHTML = findSquares(totalArea.value).toString();
+          areaList.innerHTML = findSquares(totalArea.value).toString();
         }
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>
